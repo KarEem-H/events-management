@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+ function events_management_schema() {
+    $schema['events'] = [
+        'description' => 'Stores event details',
+        'fields' => [
+            'id' => ['type' => 'serial', 'not null' => TRUE],
+            'title' => ['type' => 'varchar', 'length' => 255, 'not null' => TRUE],
+            'image' => ['type' => 'varchar', 'length' => 512, 'not null' => FALSE],
+            'description' => ['type' => 'text', 'not null' => TRUE],
+            'start_time' => ['type' => 'int', 'not null' => TRUE],
+            'end_time' => ['type' => 'int', 'not null' => TRUE],
+            'category' => ['type' => 'varchar', 'length' => 100, 'not null' => TRUE],
+        ],
+        'primary key' => ['id'],
+    ];
+    return $schema;
+}
+
+?>

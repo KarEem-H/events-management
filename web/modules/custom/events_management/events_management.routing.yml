@@ -1,0 +1,23 @@
+events_management.events_controller_list:
+  path: '/events/list'
+  defaults:
+    _controller: '\Drupal\events_management\Controller\EventsController::listEvents'
+    _title: 'Events List'
+  requirements:
+    _permission: 'access content'
+
+events_management.events_form:
+  path: '/events/data'
+  defaults:
+    _form: '\Drupal\events_management\Form\EventsForm'
+    _title: 'Add / Edit Form'
+  requirements:
+    _permission: 'TRUE'
+
+events_management.events_delete_form:
+  path: '/events/delete/{id}'
+  defaults:
+    _form: '\Drupal\events_management\Form\DeleteForm'
+    _title: 'Delete Form'
+  requirements:
+    _permission: 'TRUE'

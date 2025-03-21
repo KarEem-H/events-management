@@ -1,0 +1,128 @@
+<?php
+ function events_management_menu() {
+    $items = [];
+    $items['events_management'] = [
+        'title' => 'List Events',
+        'description' => 'List all events',
+        'route' => 'events_management.events_controller_list'
+    ];
+    $items['events_management/form/data'] = [
+        'title' => 'Add / Edite Form',
+        'description' => 'Add or Edit an event',
+        'route' => 'events_management.events_form'
+    ];
+    $items['events_management/form/delete/{id}}'] = [
+        'title' => 'Delete Event',
+        'page callback' => 'drupal_get_form',
+         'description' => 'Delete an event',
+       'route' => 'events_management.events_delete_form'
+    ];
+    return $items;
+}
+
+// function events_management_list_events() {
+//     $query = db_select('events', 'e')
+//         ->fields('e', ['id', 'title', 'start_time', 'end_time', 'category']);
+//     $results = $query->execute()->fetchAll();
+//     $rows = [];
+//     foreach ($results as $event) {
+//         $rows[] = [
+//             'data' => [
+//                 $event->id,
+//                 $event->title,
+//                 date('Y-m-d H:i:s', $event->start_time),
+//                 date('Y-m-d H:i:s', $event->end_time),
+//                 $event->category,
+//                 l('Delete', 'events/delete/' . $event->id),
+//             ],
+//         ];
+//     }
+//     $header = ['ID', 'Title', 'Start Time', 'End Time', 'Category', ''];
+//     return theme('table', ['header' => $header, 'rows' => $rows]);
+// }   
+// function events_management_add_event_form($form, &$form_state) {
+//     $form['title'] = [
+//         '#type' => 'textfield',
+//         '#title' => 'Title',
+//         '#required' => TRUE,
+//     ];
+//     $form['image'] = [
+//         '#type' => 'textfield',
+//         '#title' => 'Image',
+//     ];
+//     $form['description'] = [
+//         '#type' => 'textarea',
+//         '#title' => 'Description',
+//         '#required' => TRUE,
+//     ];
+//     $form['start_time'] = [
+//         '#type' => 'textfield',
+//         '#title' => 'Start Time',
+//         '#required' => TRUE,
+//     ];
+//     $form['end_time'] = [
+//         '#type' => 'textfield',
+//         '#title' => 'End Time',
+//         '#required' => TRUE,
+//     ];
+//     $form['category'] = [
+//         '#type' => 'textfield',
+//         '#title' => 'Category',
+//         '#required' => TRUE,
+//     ];
+//     $form['submit'] = [
+//         '#type' => 'submit',
+//         '#value' => 'Add Event',
+//     ];
+//     return $form;
+// }
+// function events_management_add_event_form_validate($form, &$form_state) {
+//     if (!is_numeric($form_state['values']['start_time'])) {
+//         form_set_error('start_time', 'Start time must be a number');
+//     }
+//     if (!is_numeric($form_state['values']['end_time'])) {
+//         form_set_error('end_time', 'End time must be a number');
+//     }
+// }
+// function events_management_add_event_form_submit($form, &$form_state) {
+//     db_insert('events')
+//         ->fields([
+//             'title' => $form_state['values']['title'],
+//             'image' => $form_state['values']['image'],
+//             'description' => $form_state['values']['description'],
+//             'start_time' => $form_state['values']['start_time'],
+//             'end_time' => $form_state['values']['end_time'],
+//             'category' => $form_state['values']['category'],
+//         ])
+//         ->execute();
+//     drupal_set_message('Event added');
+// }
+// function events_management_delete_event_form($form, &$form_state, $id = NULL) {
+//     $form['id'] = ['#type' => 'value', '#value' => $id];
+//     return confirm_form($form, 'Are you sure you want to delete event ' . $id . '?', 'events', 'events/delete/' . $id);
+// }
+// function events_management_delete_event_form_submit($form, &$form_state) {
+//     db_delete('events')
+//         ->condition('id', $form_state['values']['id'])
+//         ->execute();
+//     drupal_set_message('Event deleted');
+//     $form_state['redirect'] = 'events';
+// }
+// function events_management_schema() {
+//     $schema['events'] = [
+//         'description' => 'Stores event details',
+//         'fields' => [
+//             'id' => ['type' => 'serial', 'not null' => TRUE],
+//             'title' => ['type' => 'varchar', 'length' => 255, 'not null' => TRUE],
+//             'image' => ['type' => 'varchar', 'length' => 512, 'not null' => FALSE],
+//             'description' => ['type' => 'text', 'not null' => TRUE],
+//             'start_time' => ['type' => 'int', 'not null' => TRUE],
+//             'end_time' => ['type' => 'int', 'not null' => TRUE],
+//             'category' => ['type' => 'varchar', 'length' => 100, 'not null' => TRUE],
+//         ],
+//         'primary key' => ['id'],
+//     ];
+//     return $schema;
+// }   
+
+?>
