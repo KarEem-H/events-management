@@ -1,0 +1,4 @@
+events_management:
+  css:
+    theme:
+      css/events_management.css: {}

@@ -4,4 +4,7 @@ description: 'A module for managing events.'
 core_version_requirement: ^10
 package: Custom
 dependencies:
+  - drupal:views
   - file
+libraries:
+  - events_management/events_management

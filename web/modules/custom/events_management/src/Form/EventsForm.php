@@ -24,6 +24,11 @@ class EventsForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
+    
+    if ($id === NULL) {
+      $id = \Drupal::request()->query->get('id');
+    }
+
     $form['id'] = [
       '#type' => 'hidden',
       '#value' => $id,
@@ -83,8 +88,8 @@ class EventsForm extends FormBase {
         $form['title']['#default_value'] = $query['title'];
         $form['image']['#default_value'] = $query['image'];
         $form['description']['#default_value'] = $query['description'];
-        $form['start_time']['#default_value'] = $query['start_time'];
-        $form['end_time']['#default_value'] = $query['end_time'];
+        $form['start_time']['#default_value'] = date('m/d/Y\TH:i:s', $query['start_time']);
+        $form['end_time']['#default_value'] = date('m/d/Y\TH:i:s', $query['end_time']);
         $form['category']['#default_value'] = $query['category'];
       }
     }
@@ -97,7 +102,7 @@ class EventsForm extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
-    if (preg_match('/[^a-zA-Z0-9]/', $title) == 0) {
+    if (preg_match('/[a-zA-Z0-9]/', $title) == 0) {
         $form_state->setErrorByName('title', $this->t('Title must contain at least one letter or number.'));
     }
     $description = $form_state->getValue('description');
